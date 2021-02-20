@@ -9,6 +9,7 @@ const companies = require("./controllers/companies");
 
 // companies
 app.post("/companies", companies.create);
+app.get("/companies", companies.getAll);
 app.get("/companies/:uuid", companies.getOne);
 
 // 404
