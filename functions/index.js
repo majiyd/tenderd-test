@@ -27,6 +27,10 @@ app.put("/users", verifyToken, Users.update);
 app.post("/auth/signin", Auth.signin);
 app.post("/auth/signup", Auth.signup);
 
+app.get("/", function(req, res) {
+  res.status(200).send({message: "Welcome to Tenderd"});
+});
+
 // 404
 app.use(function(req, res) {
   res.status(404).send({message: "Resource not found"});
