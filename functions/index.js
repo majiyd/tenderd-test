@@ -20,11 +20,11 @@ app.get("/companies", Companies.getAll);
 app.get("/companies/:uuid", Companies.getOne);
 
 // users
-app.post("/users", Users.create);
 app.put("/users/:uuid", Users.update);
 
 // auth
 app.post("/auth/signin", Auth.signin);
+app.post("/auth/signup", Auth.signup);
 
 // 404
 app.use(function(req, res) {
