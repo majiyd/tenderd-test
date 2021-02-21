@@ -8,11 +8,11 @@ const app = express();
 app.use(cors({origin: true}));
 
 const serviceAccount = require("./permissions.json");
-
 firebase.initializeApp(serviceAccount);
 
 const Companies = require("./controllers/companies");
 const Users = require("./controllers/users");
+const Auth = require("./controllers/auth");
 
 // companies
 app.post("/companies", Companies.create);
@@ -22,6 +22,9 @@ app.get("/companies/:uuid", Companies.getOne);
 // users
 app.post("/users", Users.create);
 app.put("/users/:uuid", Users.update);
+
+// auth
+app.post("/auth/signin", Auth.signin);
 
 // 404
 app.use(function(req, res) {

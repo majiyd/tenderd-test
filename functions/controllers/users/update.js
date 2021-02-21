@@ -39,7 +39,6 @@ module.exports = function(req, res) {
         .get()
         .then((snapshot)=> {
           if (snapshot.exists) {
-            console.log("data.exists", data.exists, uuid);
             // update user
             db.collection("users").doc(uuid)
                 .update(data)
