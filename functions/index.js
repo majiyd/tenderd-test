@@ -1,5 +1,4 @@
 const functions = require("firebase-functions");
-
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -11,6 +10,8 @@ const companies = require("./controllers/companies");
 app.post("/companies", companies.create);
 app.get("/companies", companies.getAll);
 app.get("/companies/:uuid", companies.getOne);
+
+// users
 
 // 404
 app.use(function(req, res) {

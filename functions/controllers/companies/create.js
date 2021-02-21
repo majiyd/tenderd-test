@@ -19,6 +19,7 @@ module.exports = function(req, res) {
     const data = {
       name: value.name,
       uuid,
+      timestamp: Date.now(),
     };
 
     db.collection("companies").doc(`${data.uuid}`)

@@ -5,7 +5,7 @@ const db = require("../../db");
 module.exports = function(req, res) {
   try {
     const schema = Joi.object({
-      cursor: Joi.string().default(""),
+      cursor: Joi.number().default(1),
       limit: Joi.number().default(20),
     });
 
@@ -15,17 +15,23 @@ module.exports = function(req, res) {
     }
 
     db.collection("companies")
-        .orderBy("uuid")
+        .orderBy("timestamp")
         .startAfter(value.cursor)
         .limit(value.limit)
         .get()
         .then((snapshot)=> {
           const data = [];
+          if (snapshot.empty) {
+            return res.status(200).json({
+              data,
+            });
+          }
           snapshot.forEach((doc) => {
             data.push(doc.data());
           });
 
-          const cursor = snapshot.docs[snapshot.docs.length - 1].data().uuid;
+          const cursor =
+          snapshot.docs[snapshot.docs.length - 1].data().timestamp;
 
           return res.status(200).json({
             cursor,
