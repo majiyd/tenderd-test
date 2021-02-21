@@ -33,14 +33,27 @@ module.exports=(req, res) => {
             });
           }
           const {token, uuid} = userData;
+
           // get user
           db.collection("users").doc(uuid)
               .get()
               .then((user)=> {
                 const data = user.data();
-                data.token = token;
-                return res.status(200).json(data);
-              }).catch((err) => {
+
+                // get company name
+                db.collection("companies").doc(data.companyID)
+                    .get()
+                    .then((company) => {
+                      const companName = company.data().name;
+                      data.companyName = companName;
+                      data.token = token;
+                      return res.status(200).json(data);
+                    })
+                    .catch((err) => {
+                      return res.status(500).json({message: err.message});
+                    });
+              })
+              .catch((err) => {
                 return res.status(500).json({message: err.message});
               });
         })
