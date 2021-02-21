@@ -13,14 +13,15 @@ firebase.initializeApp(serviceAccount);
 const Companies = require("./controllers/companies");
 const Users = require("./controllers/users");
 const Auth = require("./controllers/auth");
+const verifyToken = require("./controllers/auth/verifyToken");
 
 // companies
-app.post("/companies", Companies.create);
-app.get("/companies", Companies.getAll);
-app.get("/companies/:uuid", Companies.getOne);
+app.post("/companies", verifyToken, Companies.create);
+app.get("/companies", verifyToken, Companies.getAll);
+app.get("/companies/:uuid", verifyToken, Companies.getOne);
 
 // users
-app.put("/users/:uuid", Users.update);
+app.put("/users", verifyToken, Users.update);
 
 // auth
 app.post("/auth/signin", Auth.signin);

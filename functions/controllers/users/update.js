@@ -4,7 +4,7 @@ const db = require("../../db");
 
 module.exports = function(req, res) {
   try {
-    const {uuid} = req.params;
+    const {uuid} = req;
 
     if (!uuid) {
       return res.status(400).json({message: "Missing params uuid"});
