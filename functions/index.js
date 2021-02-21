@@ -21,6 +21,7 @@ app.get("/companies/:uuid", Companies.getOne);
 
 // users
 app.post("/users", Users.create);
+app.put("/users/:uuid", Users.update);
 
 // 404
 app.use(function(req, res) {

@@ -1,6 +1,5 @@
 const firebase = require("firebase/app");
 require("firebase/auth");
-// require("firebase/firestore");
 const Joi = require("@hapi/joi");
 const db = require("../../db");
 
