@@ -39,3 +39,7 @@ export const signup = (data) => (dispatch) => {
       });
     });
 };
+
+export const logout = () => (dispatch) => {
+  dispatch({ type: actionTypes.LOGOUT });
+};

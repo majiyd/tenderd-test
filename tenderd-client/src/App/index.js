@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { logout } from "../redux/actions/userActions";
 import Auth from "./screens/Auth";
 import Signin from "./screens/Auth/Signin";
 import Signup from "./screens/Auth/Signup";
@@ -8,7 +9,7 @@ import Home from "./screens/Home";
 import Request from "./screens/Request";
 import Settings from "./screens/Settings";
 
-const App = ({ isLoggedIn }) => {
+const App = ({ isLoggedIn, logout }) => {
   if (!isLoggedIn) {
     return <Auth />;
   }
@@ -22,6 +23,9 @@ const App = ({ isLoggedIn }) => {
             </li>
             <li>
               <Link to="/settings">Settings</Link>
+            </li>
+            <li>
+              <button onClick={logout}>logout</button>
             </li>
           </ul>
         </nav>
@@ -54,4 +58,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = {
+  logout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
