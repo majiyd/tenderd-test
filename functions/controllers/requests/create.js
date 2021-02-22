@@ -11,7 +11,9 @@ module.exports = function(req, res) {
       description: Joi.string().required(),
       companyID: Joi.string().guid({version: "uuidv4"}).required(),
       taggedUser: Joi.string().required(),
+      taggedUserName: Joi.string().required(),
       taggedCompany: Joi.string().guid({version: "uuidv4"}).required(),
+      taggedCompanyName: Joi.string().required(),
     });
 
     const {error, value} = schema.validate(req.body);
@@ -20,7 +22,15 @@ module.exports = function(req, res) {
       return res.status(400).json({message: error.message});
     }
 
-    const {type, description, companyID, taggedUser, taggedCompany} = value;
+    const {
+      type,
+      description,
+      companyID,
+      taggedUser,
+      taggedCompany,
+      taggedUserName,
+      taggedCompanyName,
+    } = value;
 
     const uuid = uuidv4();
     const data = {
@@ -32,14 +42,45 @@ module.exports = function(req, res) {
       companyID,
       taggedUser,
       taggedCompany,
+      taggedUserName,
+      taggedCompanyName,
       createdBy: req.uuid,
     };
 
+    // verify user valid, verify company valid, verify company id
 
-    db.collection("requests").doc(uuid)
-        .set(data)
-        .then(()=> {
-          return res.status(201).json(data);
+    const getTaggedUser = db.collection("users").doc(taggedUser).get();
+    const getTaggedCompany = db
+        .collection("companies").doc(taggedCompany).get();
+    const getCompany = db.collection("companies").doc(companyID).get();
+
+    Promise.all([getTaggedUser, getTaggedCompany, getCompany])
+        .then(([tagged, taggedUserCompany, company]) => {
+          if (!tagged.exists) {
+            console.log("tagged", tagged);
+            return res.status(400).json({
+              message: "Assigned user does not exist",
+            });
+          }
+          if (!taggedUserCompany.exists) {
+            return res.status(400).json({
+              message: "Assigned company does not exist",
+            });
+          }
+          if (!company.exists) {
+            return res.status(400).json({
+              message: "User company does not exist",
+            });
+          }
+
+          db.collection("requests").doc(uuid)
+              .set(data)
+              .then(()=> {
+                return res.status(201).json(data);
+              })
+              .catch((err) => {
+                return res.status(500).json({message: err.message});
+              });
         })
         .catch((err) => {
           return res.status(500).json({message: err.message});
