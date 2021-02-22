@@ -39,6 +39,11 @@ module.exports=(req, res) => {
               .get()
               .then((user)=> {
                 const data = user.data();
+                data.token = token;
+
+                if (!data.companyID) {
+                  return res.status(200).json(data);
+                }
 
                 // get company name
                 db.collection("companies").doc(data.companyID)
@@ -46,7 +51,7 @@ module.exports=(req, res) => {
                     .then((company) => {
                       const companName = company.data().name;
                       data.companyName = companName;
-                      data.token = token;
+
                       return res.status(200).json(data);
                     })
                     .catch((err) => {

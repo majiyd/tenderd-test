@@ -10,6 +10,8 @@ module.exports = function(req, res) {
       ).required(),
       description: Joi.string().required(),
       companyID: Joi.string().guid({version: "uuidv4"}).required(),
+      taggedUser: Joi.string().required(),
+      taggedCompany: Joi.string().guid({version: "uuidv4"}).required(),
     });
 
     const {error, value} = schema.validate(req.body);
@@ -18,7 +20,7 @@ module.exports = function(req, res) {
       return res.status(400).json({message: error.message});
     }
 
-    const {type, description, companyID} = value;
+    const {type, description, companyID, taggedUser, taggedCompany} = value;
 
     const uuid = uuidv4();
     const data = {
@@ -28,26 +30,18 @@ module.exports = function(req, res) {
       status: "Created",
       createdAt: Date.now(),
       companyID,
+      taggedUser,
+      taggedCompany,
       createdBy: req.uuid,
     };
 
-    // ensure company exists
-    db.collection("companies").doc(companyID)
-        .get()
-        .then((company)=> {
-          if (company.exists) {
-            db.collection("requests").doc(uuid)
-                .set(data)
-                .then(()=> {
-                  return res.status(201).json(data);
-                })
-                .catch((err) => {
-                  return res.status(500).json({message: err.message});
-                });
-          } else {
-            return res.status(400).send({message: "Company not found"});
-          }
-        }).catch((err) => {
+
+    db.collection("requests").doc(uuid)
+        .set(data)
+        .then(()=> {
+          return res.status(201).json(data);
+        })
+        .catch((err) => {
           return res.status(500).json({message: err.message});
         });
   } catch (error) {
