@@ -9,7 +9,6 @@ import Request from "./screens/Request";
 import Settings from "./screens/Settings";
 
 const App = ({ isLoggedIn }) => {
-  console.log("isLoggedIn", isLoggedIn);
   if (!isLoggedIn) {
     return <Auth />;
   }

@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { signin } from "../../../redux/actions/userActions";
 
-const Signin = ({ setSignUp, signin, loading }) => {
+const Signin = ({ setSignUp, signin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("object", email, password);
     signin({ email, password });
   };
 

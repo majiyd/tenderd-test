@@ -20,3 +20,22 @@ export const signin = (data) => (dispatch) => {
       });
     });
 };
+
+export const signup = (data) => (dispatch) => {
+  dispatch({ type: actionTypes.SIGN_IN });
+  axios
+    .post(`${API_URL}/auth/signup`, data)
+    .then((res) => {
+      dispatch({
+        type: actionTypes.SIGN_IN_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((error) => {
+      window.alert(getErrorMessage(error));
+      dispatch({
+        type: actionTypes.SIGN_IN_FAILURE,
+        payload: error,
+      });
+    });
+};
