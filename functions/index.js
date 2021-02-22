@@ -30,6 +30,7 @@ app.post("/companies/:uuid", verifyToken, Companies.update);
 
 // users
 app.put("/users", verifyToken, Users.update);
+app.put("/users/remove", verifyToken, Users.remove);
 
 // requests
 app.post("/requests", verifyToken, Requests.create);

@@ -4,9 +4,8 @@ const db = require("../../db");
 
 module.exports = function(req, res) {
   try {
-    const {uuid} = req.params;
     const schema = Joi.object({
-      name: Joi.string().required(),
+      uuid: Joi.string().required(),
     });
 
     const {error, value} = schema.validate(req.body);
@@ -15,11 +14,14 @@ module.exports = function(req, res) {
       return res.status(400).json({message: error.message});
     }
 
+    const {uuid} = value;
+
+
     const data = {
-      name: value.name,
+      companyID: "",
     };
 
-    db.collection("companies").doc(`${uuid}`)
+    db.collection("users").doc(`${uuid}`)
         .update(data)
         .then(()=> {
           return res.status(200).json(data);
