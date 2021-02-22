@@ -32,6 +32,7 @@ app.get("/companies/users/:uuid", verifyToken, Companies.getUsers);
 // users
 app.put("/users", verifyToken, Users.update);
 app.put("/users/remove", verifyToken, Users.remove);
+app.get("/users/:uuid", verifyToken, Users.getUser);
 
 // requests
 app.post("/requests", verifyToken, Requests.create);
