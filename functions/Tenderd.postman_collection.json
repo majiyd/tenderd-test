@@ -128,20 +128,20 @@
 					"name": "Get All Companies",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:5001/tenderd-ac353/us-central1/app/companies/84f375d2-686a-426f-af87-3e8c02be4361",
-							"protocol": "http",
+							"raw": "{{API_URL}}/companies",
 							"host": [
-								"localhost"
+								"{{API_URL}}"
 							],
-							"port": "5001",
 							"path": [
-								"tenderd-ac353",
-								"us-central1",
-								"app",
-								"companies",
-								"84f375d2-686a-426f-af87-3e8c02be4361"
+								"companies"
 							]
 						}
 					},

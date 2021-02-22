@@ -13,9 +13,6 @@ const initialState = {
     error: {},
     requests: [],
   },
-  ui: {
-    notifications: [],
-  },
   company: {
     loading: false,
     error: {},
