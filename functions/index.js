@@ -27,6 +27,7 @@ app.post("/companies", verifyToken, Companies.create);
 app.get("/companies", verifyToken, Companies.getAll);
 app.get("/companies/:uuid", verifyToken, Companies.getOne);
 app.post("/companies/:uuid", verifyToken, Companies.update);
+app.get("/companies/users/:uuid", verifyToken, Companies.getUsers);
 
 // users
 app.put("/users", verifyToken, Users.update);
