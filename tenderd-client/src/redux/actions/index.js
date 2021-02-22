@@ -1,2 +1,8 @@
 export const SEND_NOTIFICATION = "SEND_NOTIFICATION";
 export const DELETE_NOTIFICATION = "DELETE_NOTIFICATION";
+
+export const SIGN_IN = 'SIGN_IN' 
+export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS' 
+export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE' 
+
+export const LOGOUT = "LOGOUT"

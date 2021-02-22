@@ -1,10 +1,18 @@
 import React from "react";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Auth from "./screens/Auth";
+import Signin from "./screens/Auth/Signin";
+import Signup from "./screens/Auth/Signup";
 import Home from "./screens/Home";
 import Request from "./screens/Request";
 import Settings from "./screens/Settings";
 
-export default function App() {
+const App = ({ isLoggedIn }) => {
+  console.log("isLoggedIn", isLoggedIn);
+  if (!isLoggedIn) {
+    return <Auth />;
+  }
   return (
     <Router>
       <div>
@@ -14,20 +22,23 @@ export default function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
+              <Link to="/settings">Settings</Link>
             </li>
           </ul>
         </nav>
 
         <Switch>
-          <Route path="/about">
+          <Route path="/settings">
             <Settings />
           </Route>
-          <Route path="/users">
+          <Route path="/request">
             <Request />
+          </Route>
+          <Route path="/signin">
+            <Signin />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
           <Route path="/">
             <Home />
@@ -36,4 +47,12 @@ export default function App() {
       </div>
     </Router>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.token,
+  };
+};
+
+export default connect(mapStateToProps)(App);
