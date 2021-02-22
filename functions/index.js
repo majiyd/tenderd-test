@@ -33,6 +33,7 @@ app.put("/users", verifyToken, Users.update);
 // requests
 app.post("/requests", verifyToken, Requests.create);
 app.get("/requests", verifyToken, Requests.getAll);
+app.post("/requests/:uuid", verifyToken, Requests.update);
 
 // auth
 app.post("/auth/signin", Auth.signin);

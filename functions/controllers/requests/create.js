@@ -11,9 +11,7 @@ module.exports = function(req, res) {
       description: Joi.string().required(),
       companyID: Joi.string().guid({version: "uuidv4"}).required(),
       taggedUser: Joi.string().required(),
-      taggedUserName: Joi.string().required(),
       taggedCompany: Joi.string().guid({version: "uuidv4"}).required(),
-      taggedCompanyName: Joi.string().required(),
     });
 
     const {error, value} = schema.validate(req.body);
@@ -28,8 +26,6 @@ module.exports = function(req, res) {
       companyID,
       taggedUser,
       taggedCompany,
-      taggedUserName,
-      taggedCompanyName,
     } = value;
 
     const uuid = uuidv4();
@@ -42,8 +38,6 @@ module.exports = function(req, res) {
       companyID,
       taggedUser,
       taggedCompany,
-      taggedUserName,
-      taggedCompanyName,
       createdBy: req.uuid,
     };
 
