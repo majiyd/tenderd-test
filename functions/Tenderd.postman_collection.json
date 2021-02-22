@@ -1,0 +1,441 @@
+{
+	"info": {
+		"_postman_id": "e8fbe012-d41e-449d-818a-907a24a9ba7b",
+		"name": "Tenderd",
+		"description": "Tenderd test api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "companies",
+			"item": [
+				{
+					"name": "Add Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/tenderd-ac353/us-central1/app/companies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"tenderd-ac353",
+								"us-central1",
+								"app",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Company",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"Binance\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/companies/87f49049-0b27-4685-83ef-122b26796a41",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"companies",
+								"87f49049-0b27-4685-83ef-122b26796a41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/companies/87f49049-0b27-4685-83ef-122b26796a41",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"companies",
+								"87f49049-0b27-4685-83ef-122b26796a41"
+							]
+						},
+						"description": "Requires uuid"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"type": "text",
+								"value": "{{TOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{API_URL}}/companies/users/87f49049-0b27-4685-83ef-122b26796a41",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"companies",
+								"users",
+								"87f49049-0b27-4685-83ef-122b26796a41"
+							]
+						},
+						"description": "Get users assigned to a company\nRequires uuid"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5001/tenderd-ac353/us-central1/app/companies/84f375d2-686a-426f-af87-3e8c02be4361",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"tenderd-ac353",
+								"us-central1",
+								"app",
+								"companies",
+								"84f375d2-686a-426f-af87-3e8c02be4361"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyID\": \"87f49049-0b27-4685-83ef-122b26796a41\",\n    \"name\": \"Sam Davies\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Update a user.\nuuid param is required\n{\n    name: \"\",\n    companyID: \"\",\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"companyID\": \"87f49049-0b27-4685-83ef-122b26796a41\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/xsym3jNUWOfXrYEa0RtPa7AUqye2",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"xsym3jNUWOfXrYEa0RtPa7AUqye2"
+							]
+						},
+						"description": "Get a user details.\nuuid param is required\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User Company",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-access-token",
+								"type": "text",
+								"value": "{{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"uuid\": \"gPDqNmELN4RLbZPjBL6kfmdPNNq1\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/users/remove",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"users",
+								"remove"
+							]
+						},
+						"description": "Update a user.\nuuid param is required\n{\n    name: \"\",\n    companyID: \"\",\n}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"suleimanmajiyd@gmail.com\",\n    \"password\": \"kodezero1\",\n    \"name\": \"Suleiman Majiyd\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5001/tenderd-ac353/us-central1/app/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"tenderd-ac353",
+								"us-central1",
+								"app",
+								"users"
+							]
+						},
+						"description": "Create new user\n\n{\n    \"email\": \"suleimanmajiyd@gmail.com\",\n    \"password\": \"kodezero1\",\n    \"name\": \"Suleiman Majiyd\"\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"suleimanmajiyd@gmail.com\",\n    \"password\": \"kodezero1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/signin",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						},
+						"description": "Create new user\n\n{\n    \"email\": \"suleimanmajiyd@gmail.com\",\n    \"password\": \"kodezero1\",\n}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "requests",
+			"item": [
+				{
+					"name": "Create Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyID\": \"87f49049-0b27-4685-83ef-122b26796a41\", \n    \"type\": \"Breakdown\", \n    \"description\": \"Breakdown of So and So\",\n    \"taggedUser\": \"gPDqNmELN4RLbZPjBL6kfmdPNNq1\",\n    \"taggedCompany\": \"87f49049-0b27-4685-83ef-122b26796a41\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/requests",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"requests"
+							]
+						},
+						"description": "Create request"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-access-token",
+								"type": "text",
+								"value": "{{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"Completed\", \n    \"message\": \"Breakdown of So and So now completed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/requests/813e6c94-5552-4f05-bf30-e48795ca235d",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"requests",
+								"813e6c94-5552-4f05-bf30-e48795ca235d"
+							]
+						},
+						"description": "Update a Request"
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Requests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-access-token",
+								"type": "text",
+								"value": "{{TOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/requests?companyID=87f49049-0b27-4685-83ef-122b26796a41",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"requests"
+							],
+							"query": [
+								{
+									"key": "companyID",
+									"value": "87f49049-0b27-4685-83ef-122b26796a41"
+								}
+							]
+						},
+						"description": "Create request"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
