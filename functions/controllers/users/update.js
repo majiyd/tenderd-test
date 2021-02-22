@@ -6,10 +6,6 @@ module.exports = function(req, res) {
   try {
     const {uuid} = req;
 
-    if (!uuid) {
-      return res.status(400).json({message: "Missing params uuid"});
-    }
-
     const schema = Joi.object({
       name: Joi.string(),
       companyID: Joi.string().guid({version: "uuidv4"}),
@@ -54,8 +50,6 @@ module.exports = function(req, res) {
         }).catch((err) => {
           return res.status(500).json({message: err.message});
         });
-
-    console.log("data", data);
   } catch (error) {
     return res.status(500).json({message: error.message});
   }

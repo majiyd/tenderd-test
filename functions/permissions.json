@@ -9,5 +9,6 @@
   "token_uri": "https://oauth2.googleapis.com/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-nlel5%40tenderd-ac353.iam.gserviceaccount.com",
-  "apiKey": "AIzaSyByGxbtPAox047zfdonF3Cirtms_njLULQ"
+  "apiKey": "AIzaSyByGxbtPAox047zfdonF3Cirtms_njLULQ",
+  "storageBucket":"https://console.firebase.google.com/project/tenderd-ac353/storage/tenderd-ac353.appspot.com/files"
 }
