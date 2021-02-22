@@ -16,6 +16,8 @@ cd functions && npm install && npm run serve
 
 The url should be something like this [http://localhost:5001/tenderd-ac353/us-central1/app](http://localhost:5001/tenderd-ac353/us-central1/app)
 
+## Header ['x-access-token'] is required for most endpoints
+
 Similarly, Start up the react app by opening another terminal and then entering
 
 ```bash
